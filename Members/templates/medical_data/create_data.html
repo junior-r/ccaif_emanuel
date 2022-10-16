@@ -1,0 +1,87 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Registrar datos médicos de {{ member.get_full_name }} | CCVA-E</title>
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Medical_data/css/create_data.css' %}">
+{% endblock %}
+
+{% block content %}
+    <a href="{{ request.META.HTTP_REFERER }}">
+        <box-icon name='arrow-back' color='#ffffff'></box-icon>
+    </a>
+    <h1 class="title text-center">Registra los datos médicos de <span class="text-info">{{ member.get_full_name }}</span></h1>
+    {% if member.medicaldata %}
+        <p class="text text-center fw-bold text-warning fst-italic">Este miembro ya posee datos médicos registrados. <a
+                href="#" class="text-info">Ver aquí</a></p>
+    {% endif %}
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col">
+            <label for="{{ form.allergies.id_for_label }}" class="form-label title">{{ form.allergies.label }}</label>
+            {{ form.allergies }}
+          </div>
+
+          <div class="col">
+            <label for="{{ form.blood_type.id_for_label }}" class="form-label title">{{ form.blood_type.label }}</label>
+            {{ form.blood_type }}
+          </div>
+        </div>
+
+        <div class="allergies_description">
+            <label for="{{ form.allergies_description.id_for_label }}" class="form-label title">{{ form.allergies_description.label }}</label>
+            {{ form.allergies_description }}
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="{{ form.chronic_disease.id_for_label }}" class="form-label title">{{ form.chronic_disease.label }}</label>
+            {{ form.chronic_disease }}
+          </div>
+
+          <div class="col">
+              <label for="{{ form.disease_history.id_for_label }}" class="form-label title">{{ form.disease_history.label }}</label>
+            {{ form.disease_history }}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label for="{{ form.treatment_history.id_for_label }}" class="form-label title">{{ form.treatment_history.label }}</label>
+            {{ form.treatment_history }}
+          </div>
+
+          <div class="col">
+              <label for="{{ form.current_medications.id_for_label }}" class="form-label title">{{ form.current_medications.label }}</label>
+            {{ form.current_medications }}
+          </div>
+        </div>
+
+        <div class="comment">
+            <label for="{{ form.comment.id_for_label }}" class="form-label title">{{ form.comment.label }}</label>
+            {{ form.comment }}
+        </div>
+
+        <div class="buttons d-flex gap-3 justify-content-evenly">
+            <button class="clean btn btn btn-danger" type="reset">Limpiar</button>
+            <button class="submit btn btn btn-primary" type="submit">Guardar</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block js %}
+    <script>
+        let input_allergies = document.getElementById('id_allergies_description');
+
+        function carg(element) {
+            let d = element.value;
+            input_allergies.disabled = d === "Nada";
+        }
+    </script>
+{% endblock %}

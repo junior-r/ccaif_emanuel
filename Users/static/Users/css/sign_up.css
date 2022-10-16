@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+.title {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.text {
+    font-family: 'Roboto', sans-serif;
+}
+
+.number {
+    font-family: 'Nunito', sans-serif;
+}
+
+body {
+    background-image: linear-gradient(to right bottom, #2E0249, #570A57, #A91079);
+    background-repeat: no-repeat;
+    color: #FFFFFF;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .box_form {
+}
+
+.container .box_form .form_container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.container .box_form .form_container form {
+    padding: 2em 4em;
+    background-color: #23282c;
+    border-radius: 30px 0 0 30px;
+}
+
+.container .box_form .form_container form div {
+    margin-bottom: 1rem;
+}
+
+.container .box_form .form_container form > #div_id_picture_profile {
+    display: none;
+}
+
+.container .box_form .form_container form div .help-block {
+    font-style: italic;
+}
+
+.container .box_form .form_container form div [id^='error'] {
+    color: #F15412;
+}
+
+.container .box_form .form_container form label {
+    color: #808080;
+}
+
+.container .box_form .form_container form input {
+    background: none;
+    color: #FFFFFF;
+    border: none;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+    width: 100%;
+    transition: all linear .3s;
+}
+
+.container .box_form .form_container form input[type="checkbox"] {
+    width: auto;
+}
+
+.container .box_form .form_container form input:focus {
+    outline: none;
+    border-bottom-color: steelblue;
+}
+
+.container .box_form .form_container form input:valid {
+    border-bottom-color: #9f8465;
+}
+
+.container .box_form .form_container form input:invalid {
+    border-bottom-color: #F15412;
+}
+
+.container .box_form .form_container .sidebar {
+    background-color: steelblue;
+    padding: 2em 2em;
+    border-radius: 0 30px 30px 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+    text-align: end;
+}
+
+.container .box_form .form_container .sidebar h1 {
+    font-weight: 800;
+    text-align: end;
+}
+
+.container .box_form .form_container .sidebar img {
+    width: 15em;
+    height: 15em;
+    margin-inline: auto;
+}
+
+.container .box_form .form_container .sidebar .have_account p {
+    margin-bottom: 0;
+}
+
+.container .box_form .form_container .sidebar .have_account a {
+    color: #FFFFFF;
+    text-decoration: none;
+    border-bottom: 1px solid #fff;
+}
+
+
+/* Input style */
+.container-input {
+    text-align: center;
+}
+
+.inputfile {
+    width: 0.1px !important;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.inputfile + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    margin-right: 0.25em;
+}
+
+.iborrainputfile {
+	font-size: 1rem;
+}
+
+
+.inputfile-5 + label {
+    color: #c39f77;
+}
+
+.inputfile-5:focus + label,
+.inputfile-5.has-focus + label,
+.inputfile-5 + label:hover {
+    color: #9f8465;
+}
+
+.inputfile-5 + label figure {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #c39f77;
+    display: block;
+    padding: 20px;
+    margin: 0 auto 10px;
+    position: relative;
+}
+
+.inputfile-5 + label figure > img {
+    object-fit: fill;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.inputfile-5:focus + label figure,
+.inputfile-5.has-focus + label figure,
+.inputfile-5 + label:hover figure {
+    background-color: #9f8465;
+}
+
+.inputfile-5 + label svg {
+    width: 100%;
+    height: 100%;
+    fill: #fff;
+}
+
+.container .box_form .form_container form .buttons .submit {
+    width: 100%;
+    padding: 1rem 2rem;
+    text-transform: uppercase;
+    border-radius: 30px;
+    background-color: rgba(0, 0, 0, 0);
+    color: #FFFFFF;
+    font-weight: 800;
+    border: 1px solid steelblue;
+    transition: all ease-in 0.3s;
+}
+
+.container .box_form .form_container form .buttons .submit:hover {
+    background-color: steelblue;
+    border-color: #000;
+}

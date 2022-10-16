@@ -1,0 +1,54 @@
+.container {
+    margin-top: 2em;
+    position: relative;
+}
+
+.container > a [name='arrow-back'] {
+    position: absolute;
+    top: 1em;
+}
+
+.container form {
+    width: 60%;
+    margin-inline: auto;
+    margin-top: 2em;
+}
+
+.container form > div {
+    margin-top: 1em;
+}
+
+.container form > div input,
+.container form > div select,
+.container form > div textarea {
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 0;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all .3s ease-in;
+}
+
+.container form > div input:focus,
+.container form > div select:focus,
+.container form > div textarea:focus {
+    background: none;
+    outline: none !important;
+    box-shadow: none;
+    color: #FFFFFF;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.container form > div input:disabled,
+.container form > div select:disabled,
+.container form > div textarea:disabled {
+    background: none;
+    outline: none !important;
+    box-shadow: none;
+    color: #FFFFFF;
+    border-bottom: 2px solid rgba(255, 0, 0, 0.8);
+}
+
+.container form > div select option {
+    color: #000000;
+}

@@ -1,0 +1,43 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Eventos | CCAIFE</title>
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Posts/css/event.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1 class="title text-center my-3">Eventos</h1>
+    <div class="content-events">
+        {% for event in events %}
+            <div class="card text-bg-dark">
+                <img src="{{ event.get_image }}" class="card-img" alt="imagen del evento {{ event.title }}">
+                <div class="card-img-overlay">
+                    <div class="main-card_body">
+                        <h2 class="card-title fw-bold title">{{ event.title }}</h2>
+                        <span class="card-text text m-0">{{ event.get_short_description | linebreaks | capfirst }}</span>
+                    </div>
+                    <div class="footer-card_body d-flex flex-column align-items-center gap-3">
+                        {% if event.form %}
+                            {% if event.eventparticipant_set.all.count < event.max_num_partp %}
+                                <a href="{% url 'register_event' event.id %}" class="btn btn-lg btn-outline-info d-flex align-items-center"><span>¡Quiero asistir!</span> <box-icon name='right-arrow-alt' color="#ffffff"></box-icon></a>
+                            {% endif %}
+                            <p class="number"><span class="text-info">{{ event.eventparticipant_set.all.count }}</span>/<span class="text-warning">{{ event.max_num_partp }}</span></p>
+                        {% endif %}
+                        <p class="card-text my-0 number text-center">Inicia el <small class="text-warning">{{ event.date }}</small></p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

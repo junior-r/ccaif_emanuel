@@ -1,0 +1,143 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Crear evento | CCAIFE</title>
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Posts/css/input_file.css' %}">
+    <link rel="stylesheet" href="{% static 'Posts/css/create_event.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1 class="title text-center my-3">Crear Evento</h1>
+
+    <form action="" method="post" enctype="multipart/form-data" class="my-5">
+        <div class="container-input">
+            {% csrf_token %}
+            {{ form.image }}
+            <label for="file-5">
+                <figure>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6h96 32H424c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48z"/></svg>
+
+                    <img id="imagenPrevisualizacion" loading="lazy">
+                </figure>
+                <span class="iborrainputfile title">{{ form.image.label }}</span>
+                {% if form.image.errors %}
+                    <span class="alert alert-warning alert-dismissibl mb-0 mt-2e fade show" role="alert">
+                        {{ form.image.errors }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </span>
+                {% endif %}
+            </label>
+        </div>
+
+        <div class="container-title">
+            <div class="form-floating mb-3">
+                {{ form.title }}
+                <label for="{{ form.title.id_for_label }} floatingInput" class="title">{{ form.title.label }}</label>
+            </div>
+            {% if form.title.errors %}
+                <div class="alert alert-warning alert-dismissible mb-0 mt-2 fade show" role="alert">
+                    {{ form.title.errors }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="container-description">
+            <label for="{{ form.description.id_for_label }}" class="title">{{ form.description.label }}</label>
+            {{ form.description }}
+            {% if form.description.errors %}
+                <div class="alert alert-warning alert-dismissible mb-0 mt-2 fade show" role="alert">
+                    {{ form.description.errors }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-floating mb-3">
+                    {{ form.place }}
+                    <label for="{{ form.place.id_for_label }} floatingInput" class="title">{{ form.place.label }}</label>
+                </div>
+
+                {% if form.place.errors %}
+                    <div class="alert alert-warning alert-dismissible mb-0 mt-2 fade show" role="alert">
+                        {{ form.place.errors }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="form-floating mb-3">
+                    {{ form.date }}
+                    <label for="{{ form.date.id_for_label }} floatingInput" class="title">{{ form.date.label }}</label>
+                </div>
+                {% if form.date.errors %}
+                    <div class="alert alert-warning alert-dismissible mb-0 mt-2 fade show" role="alert">
+                        {{ form.date.errors }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-3">
+                <div class="form-check">
+                    {{ form.form }}
+                    <label class="form-check-label {{ form.form.id_for_label }}" for="flexCheckDefault">
+                        {{ form.form.label }}
+                    </label>
+                </div>
+                {% if form.form.errors %}
+                    <div class="alert alert-warning alert-dismissible mb-0 mt-2 fade show" role="alert">
+                        {{ form.form.errors }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <label for="{{ form.max_num_partp.id_for_label }}" class="title">{{ form.max_num_partp.label }}</label>
+                {{ form.max_num_partp }}
+                {% if form.max_num_partp.errors %}
+                    <div class="alert alert-warning alert-dismissible mb-0 mt-2 fade show" role="alert">
+                        {{ form.max_num_partp.errors }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="captcha m-auto">
+            {{ form.captcha }}
+            {% if form.captcha.errors %}
+                <div class="alert alert-warning alert-dismissible mb-0 mt-2 fade show" role="alert">
+                    {{ form.captcha.errors }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="buttons d-flex justify-content-evenly gap-3 mt-3">
+            <button type="reset" class="btn btn-sm btn-outline-danger rounded px-4 py-2">Limpiar</button>
+            <button type="submit" class="btn btn-sm btn-outline-primary rounded px-4 py-2">Guardar</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'Posts/js/input_file.js' %}"></script>
+    <script>
+       function comprobar(obj)
+        {
+            document.getElementById('max_num_partp').disabled = !obj.checked;
+              document.getElementById('max_num_partp').value = '';
+        }
+    </script>
+{% endblock %}

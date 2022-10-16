@@ -1,0 +1,107 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+    <title>Miembro {{ member.get_full_name }} | CCAIFE</title>
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Members/css/view_member.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="header mt-3">
+        <h1 class="title">Bienvenido <span class="fst-italic">{{ request.user.get_full_name }}</span></h1>
+        <p class="text">Información de {{ member.get_full_name }}</p>
+    </header>
+    <div class="content">
+        <div class="panel">
+            <div class="box_info_member">
+                <figure class="img_profile mx-auto">
+                    <img src="{{ member.get_profile_picture }}" alt="Imágen de perfil de {{ member.get_full_name }}" loading="lazy">
+                </figure>
+                <div class="info_body">
+                    <p class="text d-flex justify-content-center align-items-center">{{ member.get_full_name | capfirst }} {{ member.get_gender | safe }}</p>
+                    <p class="text text-muted text-center m-0 mb-2">Se unió el: {{ member.date_joined }}</p>
+                    <p class="text text-muted text-center m-0 mb-2">Nació el: {{ member.birth_date.isoformat }}</p>
+                    <div class="social_media">
+                        <a href="mailto:{{ member.email }}"><box-icon type='logo' name='gmail'></box-icon></a>
+                        <a href="https://api.whatsapp.com/send?phone={{ member.get_phone_number }}" target="_blank"><box-icon name='whatsapp' type='logo' ></box-icon></a>
+                        <a href="https://www.google.com.ec/maps/place/{{ real_address_user }}" target="_blank"><box-icon name='map' ></box-icon></a>
+                    </div>
+                    <div class="bio mt-3 fst-italic">
+                        <p class="title fw-bold m-0">Biografía</p>
+                        <p class="text">{{ member.bio }}</p>
+                    </div>
+                </div>
+                {% if perms.Members.change_member %}
+                    <a href="{% url 'edit_member' member.id member.get_full_name %}" class="edit_icon"><box-icon name='edit-alt'></box-icon></a>
+                {% endif %}
+            </div>
+            <aside>
+                <div class="medical_data">
+                    {% if perms.Members.view_medicaldata %}
+                        {% if member.medicaldata %}
+                            <h3 class="title text-center">Datos médicos</h3>
+                            <p class="text"><span class="label">Alergico a: </span> <span class="value fst-italic text-warning">{{ member.medicaldata.allergies }}</span></p>
+                            {% if member.medicaldata.allergies_description %}
+                                <p class="text text-secondary fst-italic"><span class="label text-black fst-normal">Descripción de alergias: </span> {{ member.medicaldata.allergies_description }}</p>
+                            {% endif %}
+                            <p class="text">Tipo de sangre <span class="value text-danger fw-bold">{{ member.medicaldata.blood_type }}</span></p>
+                            {% if member.medicaldata.chronic_disease %}
+                                <p class="text text-secondary fst-italic"><span class="label text-black fst-normal">Enfermedades: </span> {{ member.medicaldata.chronic_disease }}</p>
+                            {% endif %}
+                            {% if member.medicaldata.disease_history %}
+                                <p class="text text-secondary fst-italic"><span class="label text-black fst-normal">Historial de enfermedades: </span> {{ member.medicaldata.disease_history }}</p>
+                            {% endif %}
+                            {% if member.medicaldata.treatment_history %}
+                                <p class="text text-secondary fst-italic"><span class="label text-black fst-normal">Historial de tratamiento: </span> {{ member.medicaldata.treatment_history }}</p>
+                            {% endif %}
+                            {% if member.medicaldata.current_medications %}
+                                <p class="text text-secondary fst-italic"><span class="label text-black fst-normal">Medicamentos que consume: </span> {{ member.medicaldata.current_medications }}</p>
+                            {% endif %}
+                            {% if member.medicaldata.comment %}
+                                <p class="label text-black fst-normal">Observaciónes:</p>
+                                <span class="text-secondary fst-italic ms-3">{{ member.medicaldata.comment | linebreaks }}</span>
+                            {% endif %}
+                            {% if perms.Members.change_medicaldata %}
+                                <a href="{% url 'edit_medical_data' member.id member.get_full_name %}" class="edit_icon"><box-icon name='edit-alt'></box-icon></a>
+                            {% endif %}
+                        {% else %}
+                            <div class="not_found">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#e21b1b"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
+                                <p class="message text m-0">Este miembro no posee datos médicos registrados.</p>
+                                <p class="text text-primary m-0"><a href="{% url 'create_medical_data' member.id %}" class="text-reset text-decoration-none">Regístra aquí</a></p>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="not_found">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#e21b1b"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
+                            <p class="message text m-0">No tienes permiso para ver esta información</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="study_data">
+                    {% if member.academicdata %}
+                        <h3 class="title text-center">Datos académicos</h3>
+                        <p class="text text-warning fst-italic m-2"><span class="label text-black fst-normal">Nivel académico alcanzado: </span> {{ member.academicdata.level.title }}</p>
+                        <p class="text text-warning fst-italic m-2"><span class="label text-black fst-normal">Status del nivel académico: </span> {{ member.academicdata.status.title }}</p>
+                        <p class="text text-black fst-normal m-2 mb-0">Aspiraciones:</p>
+                        <span class="text-secondary text d-inline-block ms-4 fst-italic">{{ member.academicdata.aspiration | linebreaks }}</span>
+                        {% if perms.Members.change_academicdata %}
+                            <a href="{% url 'edit_academic_data' member.id member.get_full_name %}" class="edit_icon"><box-icon name='edit-alt'></box-icon></a>
+                        {% endif %}
+                    {% else %}
+                        <div class="not_found">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="#e21b1b"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>
+                            <p class="message text m-0">Este miembro no posee datos académicos registrados.</p>
+                            <p class="text text-primary m-0"><a href="{% url 'create_academic_data' member.id %}" class="text-reset text-decoration-none">Regístra aquí</a></p>
+                        </div>
+                    {% endif %}
+                </div>
+            </aside>
+        </div>
+    </div>
+{% endblock %}

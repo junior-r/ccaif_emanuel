@@ -1,0 +1,72 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+    <title>Miembros | CCAIFE</title>
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Members/css/members.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="content pt-3">
+        <h1 class="title text-center">Miembros de La Iglesia.</h1>
+        <div class="members__container">
+            {% for member in members %}
+                <div class="card_member member-{{ member.id }}">
+                    <div class="btn-group">
+                        <button type="button" class="dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                            <box-icon name='dots-horizontal-rounded'></box-icon>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                            <li><button class="dropdown-item" type="button">Action</button></li>
+                            <li><button class="dropdown-item" type="button">Another action</button></li>
+                            <li><button class="dropdown-item" type="button">Something else here</button></li>
+                        </ul>
+                    </div>
+                    <div class="card_top">
+                        <figure class="member_img_profile">
+                            <img src="{{ member.get_profile_picture }}" alt="Foto de perfil de {{ member.get_full_name }}" loading="lazy">
+                        </figure>
+                        <a href="{% url 'view_member' member.id member.get_full_name %}" class="title member_name text-decoration-none text-primary">{{ member.get_full_name | capfirst }}</a>
+                        <p class="number member_dni">{{ member.dni | intcomma }}</p>
+                        <p class="number member_age">{{ member.get_age }} años</p>
+                    </div>
+                    <div class="card__body">
+                        <div class="medical_data">
+                            {% if not member.medicaldata %}
+                                <a href="{% url 'create_medical_data' member.id %}" class="d-flex justify-content-center text-decoration-none">
+                                    <box-icon name='x-circle' color="#dc3545"></box-icon>
+                                    <span>Datos médicos</span>
+                                </a>
+                            {% else %}
+                                <a href="#" class="d-flex justify-content-center text-decoration-none">
+                                    <box-icon name='check-circle' color="#00c84b"></box-icon>
+                                    <span>Datos médicos</span>
+                                </a>
+                            {% endif %}
+                        </div>
+                        <div class="study_data">
+                            {% if not member.academicdata %}
+                                <a href="{% url 'create_academic_data' member.id %}" class="d-flex justify-content-center text-decoration-none">
+                                    <box-icon name='x-circle' color="#dc3545"></box-icon>
+                                    <span>Datos académicos</span>
+                                </a>
+                            {% else %}
+                                <a href="#" class="d-flex justify-content-center text-decoration-none">
+                                    <box-icon name='check-circle' color="#00c84b"></box-icon>
+                                    <span>Datos académicos</span>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card_footer">
+                        <p class="text member_bio">{{ member.get_short_bio }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

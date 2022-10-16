@@ -1,0 +1,13 @@
+.container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 70%;
+    margin-inline: auto;
+}
+
+.container form .buttons {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1em;
+}

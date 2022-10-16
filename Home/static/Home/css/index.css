@@ -1,0 +1,17 @@
+.container {
+    margin: 2em auto;
+}
+
+.item__picture {
+    height: 450px;
+}
+
+.item__picture img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.item__body > a {
+    width: fit-content;
+    margin-inline: auto;
+}

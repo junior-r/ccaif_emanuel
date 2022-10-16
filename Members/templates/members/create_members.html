@@ -1,0 +1,105 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Crear miembros | CCAIFE</title>
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Members/css/create_members.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="header d-flex justify-content-center w-100">
+        <h1 class="mb-3">¡Registra un miembro!</h1>
+        <a href="{{ request.META.HTTP_REFERER }}" class="arrow-back">
+            <box-icon name='arrow-back' color='#ffffff'></box-icon>
+        </a>
+    </header>
+
+    {% if form.errors %}
+        <div class="error_container ">
+            <h2 class="title text-center">Error</h2>
+            {{ form.errors }}
+        </div>
+    {% endif %}
+    
+    <form action="" method="post" enctype="multipart/form-data" class="w-50 mx-auto create_form">
+        {% csrf_token %}
+
+        <div class="container-input">
+            {{ form.picture_profile }}
+            <label for="file-5">
+                <figure>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="iborrainputfile" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg>
+                    <img id="imagenPrevisualizacion" loading="lazy">
+                </figure>
+                <span class="iborrainputfile title">{{ form.picture_profile.label }}</span>
+            </label>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="first_name title">{{ form.first_name.label }}</label>
+                {{ form.first_name }}
+                <div id="f_contador" class="counter text-muted number">0/200</div>
+            </div>
+            <div class="col">
+                <label for="first_name title">{{ form.last_name.label }}</label>
+                {{ form.last_name }}
+                <div id="l_contador" class="counter text-muted number">0/200</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="id_dni title">{{ form.dni.label }}</label>
+                {{ form.dni }}
+            </div>
+            <div class="col">
+                <label for="id_gender title">{{ form.gender.label }}</label>
+                {{ form.gender }}
+            </div>
+        </div>
+
+        <div class="email">
+            <label for="id_email title">{{ form.email.label }}</label>
+            {{ form.email }}
+        </div>
+
+        <div class="address">
+            <label for="address title">{{ form.address.label }}</label>
+            {{ form.address }}
+            <div id="a_contador" class="counter text-muted number">0/200</div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="id_dni title">{{ form.phone_number.label }}</label>
+                {{ form.phone_number }}
+            </div>
+            <div class="col">
+                <label for="id_gender title">{{ form.birth_date.label }}</label>
+                {{ form.birth_date }}
+            </div>
+        </div>
+
+        <div class="bio">
+            <label for="bio title">{{ form.bio.label }}</label>
+            {{ form.bio }}
+            <div id="b_contador" class="counter text-muted number">0/300</div>
+        </div>
+
+        {{ form.captcha }}
+
+        <div class="buttons d-flex justify-content-evenly">
+            <button type="reset" class="btn btn-danger px-5 text">Limpiar</button>
+            <button type="submit" class="btn btn-primary px-5 text">Enviar</button>
+        </div>
+
+    </form>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'Members/JavaScript/counter_characters.js' %}"></script>
+{% endblock %}

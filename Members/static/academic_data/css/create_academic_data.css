@@ -1,0 +1,23 @@
+.container .content form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto auto;
+    gap: 2em;
+    flex-wrap: wrap;
+}
+
+.container .content form .status {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.container .content form .status #id_status {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container .content form .aspiration_block,
+.container .content form .buttons {
+    grid-column: 1 / -1;
+}
+

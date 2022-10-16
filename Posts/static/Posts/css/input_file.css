@@ -1,0 +1,81 @@
+/* Input style */
+.container-input {
+    text-align: center;
+}
+
+.inputfile {
+    width: 0.1px !important;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.inputfile + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    margin-right: 0.25em;
+}
+
+.iborrainputfile {
+	font-size: 1rem;
+}
+
+
+.inputfile-5 + label {
+    color: rgba(255, 255, 255, 0.5);
+    transition: 0.3s all;
+    width: 540px;
+    height: 540px;
+}
+
+.inputfile-5:focus + label,
+.inputfile-5.has-focus + label,
+.inputfile-5 + label:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+.inputfile-5 + label figure {
+    height: 100%;
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    display: block;
+    padding: 20px;
+    margin: 0 auto 10px;
+    position: relative;
+    transition: .3s all;
+}
+
+.inputfile-5 + label figure > img {
+    object-fit: cover;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+}
+
+.inputfile-5:focus + label figure,
+.inputfile-5.has-focus + label figure {
+    background-color: #9f8465;
+}
+
+.inputfile-5 + label:hover figure {
+    border-color: rgba(255, 255, 255, 1);
+}
+
+.inputfile-5 + label svg {
+    width: 100%;
+    height: 100%;
+    fill: #fff;
+}

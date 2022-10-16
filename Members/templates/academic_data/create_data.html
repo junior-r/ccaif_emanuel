@@ -1,0 +1,46 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Registrar datos academicos de {{ member.get_full_name | title }} | CCAIF</title>
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'academic_data/css/create_academic_data.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1 class="title text-center mt-3">Registra los datos académicos de <span class="text-info">{{ member.get_full_name | title }}</span></h1>
+    <div class="content mt-5">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="levels">
+                <h3 class="title text-center">Nivel académico alcanzado</h3>
+                <div class="block_levels block text">
+                    {{ form.level }}
+                </div>
+            </div>
+
+            <div class="status me-auto">
+                <h3 class="title text-center">Estatus académico</h3>
+                <div class="status_block block">
+                    {{ form.status }}
+                </div>
+            </div>
+            <div class="aspiration_block block">
+                <label for="{{ form.aspiration.id_for_label }}" class="title mb-3">{{ form.aspiration.label }}</label>
+                {{ form.aspiration }}
+            </div>
+            <div class="buttons d-flex justify-content-evenly mt-3">
+                <button class="btn btn-outline-danger px-4" type="reset">Limpiar</button>
+                <button class="btn btn-outline-primary px-5" type="submit">Guardar</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

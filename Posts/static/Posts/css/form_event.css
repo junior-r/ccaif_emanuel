@@ -1,0 +1,45 @@
+:root {
+    --padding: 2em
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: var(--padding);
+    justify-content: space-between;
+    margin: 2em 0 3em 0;
+    background-color: rgba(255, 255, 255, .7);
+    padding: var(--padding);
+    border-radius: 30px;
+}
+
+.content .event_container {
+
+}
+
+.content .form_event {
+}
+
+.container .participants_list {
+    min-height: 50vh;
+}
+
+.content .event_container,
+.content .form_event {
+    background-color: rgba(255, 255, 255, 1);
+    color: #000000;
+    padding: var(--padding);
+    border-radius: 30px;
+}
+
+.content .event_container .event_picture img {
+    width: 100%;
+}
+
+.content .form_event form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 2em;
+}

@@ -1,0 +1,153 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.container .header {
+    position: relative !important;
+    z-index: -1;
+}
+
+.container .header .arrow-back {
+    position: absolute;
+    top: 1rem;
+    left: 0;
+}
+
+.container .error_container {
+    background-color: #bb2d3b;
+    margin: 1rem 0;
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+}
+
+.container .error_container .text-center {
+    font-weight: 700;
+}
+
+.container .error_container > .errorlist li {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+}
+
+.container .error_container > .errorlist li .errorlist li {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+.container .create_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container .create_form > div {
+    margin-bottom: 1rem !important;
+    flex: 1;
+    margin-inline: 0 !important;
+    gap: 1rem;
+    width: 100%;
+}
+
+.container .create_form > div input {
+    font-family: 'Roboto', sans-serif;
+}
+
+.container .create_form > .g-recaptcha {
+    width: auto;
+}
+
+.container .create_form .row .col {
+    padding-inline: 0 !important;
+}
+
+.container .create_form > div .counter {
+    display: flex;
+    justify-content: end;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #000;
+}
+
+.container .create_form .buttons button {
+    text-transform: uppercase;
+}
+
+/* Input style */
+.container-input {
+    text-align: center;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.inputfile + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    margin-right: 0.25em;
+}
+
+.iborrainputfile {
+	font-size: 1rem;
+}
+
+
+.inputfile-5 + label {
+    color: #c39f77;
+}
+
+.inputfile-5:focus + label,
+.inputfile-5.has-focus + label,
+.inputfile-5 + label:hover {
+    color: #9f8465;
+}
+
+.inputfile-5 + label figure {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #c39f77;
+    display: block;
+    padding: 20px;
+    margin: 0 auto 10px;
+    position: relative;
+}
+
+.inputfile-5 + label figure > img {
+    object-fit: fill;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.inputfile-5:focus + label figure,
+.inputfile-5.has-focus + label figure,
+.inputfile-5 + label:hover figure {
+    background-color: #9f8465;
+}
+
+.inputfile-5 + label svg {
+    width: 100%;
+    height: 100%;
+    fill: #fff;
+}

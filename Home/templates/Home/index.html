@@ -1,0 +1,46 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Home | CCAIFE</title>
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Home/components/Carousel/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Home/components/Carousel/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'Home/css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1 class="title text-center mb-3">¡Mira nuestros próximos eventos!</h1>
+    <div class="owl-container">
+        <div class="owl-carousel owl-theme">
+            {% for event in events %}
+                <div class="item">
+                    <figure class="item__picture">
+                        <img src="{{ event.get_image }}" alt="imagen del evento {{ event.title }}">
+                    </figure>
+                    <div class="item__body">
+                        <h3 class="title item__title text-center fw-bold">{{ event.title.title }}</h3>
+                        <p class="text text__description text-center m-0 mb-1">{{ event.description | capfirst }}</p>
+                        <p class="number text-center m-0 mb-1">{{ event.date }}</p>
+                        {% if event.form %}
+                            {% if event.eventparticipant_set.all.count < event.max_num_partp %}
+                                <a href="{% url 'register_event' event.id %}" class="btn btn-lg btn-outline-info d-flex align-items-center"><span>¡Quiero asistir!</span> <box-icon name='right-arrow-alt' color="#ffffff"></box-icon></a>
+                            {% else %}
+                                <p class="text m-0 text-center text-info fst-italic fw-bold">¡Ups cupos agotados!</p>
+                            {% endif %}
+                            <p class="number m-0 text-center"><span class="text-info">{{ event.eventparticipant_set.all.count }}</span>/<span class="text-warning">{{ event.max_num_partp }}</span></p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'Home/components/Carousel/jquery.min.js' %}"></script>
+    <script src="{% static 'Home/components/Carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'Home/components/Carousel/main.js' %}"></script>
+{% endblock %}

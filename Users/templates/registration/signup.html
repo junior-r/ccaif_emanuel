@@ -1,0 +1,86 @@
+{% load crispy_forms_tags %}
+{% load static %}
+{% load humanize %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Crear cuenta | CCAIFE</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'Users/css/sign_up.css' %}">
+    <link rel="icon" href="{% static 'Home/img/logo_short_white.svg' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="box_form">
+            <div class="form_container">
+                <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
+                    {% csrf_token %}
+                    <a href="{{ request.META.HTTP_REFERER }}">
+                        <box-icon name='arrow-back' color='#ffffff'></box-icon>
+                    </a>
+                    <div class="container-input">
+                        {{ form.picture_profile }}
+                        <label for="file-5">
+                            <figure>
+                                <img src="{% static 'Users/images/undraw_pic_profile.svg' %}" alt="imagen de perfil de usuario">
+                                <img id="imagenPrevisualizacion" loading="lazy">
+                            </figure>
+                            <span class="iborrainputfile title">{{ form.picture_profile.label }}</span>
+                        </label>
+                    </div>
+                    {{ form | crispy }}
+                    <div class="buttons">
+                        <button type="submit" class="submit title">¡Regístrate Ahora!</button>
+                    </div>
+                </form>
+                <div class="sidebar">
+                    <h1 class="title">Crea tu cuenta</h1>
+                    <img src="{% static 'Users/images/undraw_pic_profile.svg' %}" alt="imagen de perfil de usuario">
+                    <div class="have_account">
+                        <p class="text">¿Ya tienes una cuenta?</p>
+                        <a href="{% url 'login' %}">Ingresa aquí</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="{% static 'Users/js/input_file.js' %}"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% if messages %}
+        {% for m in messages %}
+            <script>
+                Swal.fire({
+                    title: '{{ m.tags|capfirst }}',
+                    text: '{{ m }}',
+                    icon: '{{ m.tags }}'
+                })
+            </script>
+        {% endfor %}
+    {% endif %}
+
+    <script>
+        function is_staff() {
+            Swal.fire({
+                'title': '¿Desea designar como parte del Staff?',
+                'text': 'Este usuario poseerá permisos avanzados.',
+                'icon': 'warning',
+                'showCancelButton': true,
+                'cancelButtonText': 'Cancelar',
+                'confirmButtonText': 'Salir',
+                'confirmButtonColor': '#dc3545'
+            })
+        }
+    </script>
+
+</body>
+</html>

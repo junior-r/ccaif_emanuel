@@ -1,0 +1,35 @@
+.container form {
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+
+.alert ul {
+    margin: 0;
+    padding: 0;
+}
+
+.alert ul li {
+    list-style: none;
+}
+
+.container form input:not(input[type='checkbox']),
+.container form textarea {
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 0;
+    color: #fff;
+}
+
+.container form input:not(input[type='checkbox']):focus,
+.container form textarea:focus {
+    background: none;
+    border: none;
+    color: #fff;
+    box-shadow: none;
+    border-bottom: 1px solid #22bf76;
+}

@@ -1,0 +1,139 @@
+{% extends 'Home/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Regístrate para {{ event.title }} | CCAIFE</title>
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'Posts/css/form_event.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <div class="event_container">
+            <figure class="event_picture">
+                <img src="{{ event.get_image }}" alt="Imagen del evento {{ event.title }}" loading="lazy">
+            </figure>
+            <div class="event_body">
+                <h3 class="title text-center fw-bold">{{ event.title | capfirst }}</h3>
+                <span class="text fst-italic">{{ event.description | linebreaks }}</span>
+                <p class="number">Lugar: {{ event.place }}</p>
+            </div>
+            <div class="event_footer">
+                <p class="number">Fecha: {{ event.date }}</p>
+                <p class="active d-flex align-item-center">Activo:
+                    {% if event.active %}
+                        <box-icon name='check-circle' type='solid' color='#198754' ></box-icon>
+                    {% else %}
+                        <box-icon name='x-circle' type='solid' color='#198754' ></box-icon>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+        <div class="form_event">
+            <h2 class="title text-center fw-bold">Regístrate solo quedan <span class="text-danger">{{ rest | intcomma }}</span>/<span class="text-primary">{{ event.max_num_partp | intcomma }}</span></h2>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="names">
+                    <label for="{{ form.first_name.id_for_label }}">
+                        {{ form.first_name.label }}
+                    </label>
+                    {{ form.first_name }}
+
+                    {% if form.first_name.errors %}
+                        <span class="alert">
+                            {{ form.first_name.errors }}
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="last_names">
+                    <label for="{{ form.last_name.id_for_label }}">
+                        {{ form.last_name.label }}
+                    </label>
+                    {{ form.last_name }}
+
+                    {% if form.last_name.errors %}
+                        <span class="alert">
+                            {{ form.last_name.errors }}
+                        </span>
+                    {% endif %}
+                </div>
+
+                <div class="row align-items-center">
+                    <div class="col">
+                        <label for="{{ form.birth_date.id_for_label }}">
+                            {{ form.birth_date.label }}
+                        </label>
+                        {{ form.birth_date }}
+
+                        {% if form.birth_date.errors %}
+                        <span class="alert">
+                            {{ form.birth_date.errors }}
+                        </span>
+                    {% endif %}
+                    </div>
+                    <div class="col">
+                        {{ form.is_member }}
+                        <label for="{{ form.is_member.id_for_label }}">
+                            {{ form.is_member.label }}
+                        </label>
+
+                        {% if form.is_member.errors %}
+                        <span class="alert">
+                            {{ form.is_member.errors }}
+                        </span>
+                    {% endif %}
+                    </div>
+                </div>
+                <div class="captcha mx-auto">
+                    {{ form.captcha }}
+                </div>
+
+                <div class="buttons d-flex gap-3 justify-content-between">
+                    <button type="reset" class="btn text btn-outline-danger px-4">Limpiar</button>
+                    <button type="submit" class="btn text btn-outline-primary px-4">Registrarme</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="participants_list">
+        <h3 class="title text-center fw-bold">Lista de participantes (<span class="text-info">{{ participants.count }}</span>)</h3>
+        <table class="table text-white">
+            <thead>
+                <tr>
+                    <th scope="col" class="title">Nombres</th>
+                    <th scope="col" class="title">Apellidos</th>
+                    <th scope="col" class="title">Edad</th>
+                    <th scope="col" class="title">¿Es miembro?</th>
+                    <th scope="col" class="title">Fecha de registro</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for part in participants %}
+                <tr>
+                    <td class="text">{{ part.first_name | title }}</td>
+                    <td class="text">{{ part.last_name | title }}</td>
+                    <td class="number">{{ part.get_age }} años</td>
+                    <td class="number">
+                        {% if part.is_member %}
+                            <box-icon name='check-circle' type='solid' color='#69b13c' ></box-icon>
+                        {% else %}
+                            <box-icon name='x-circle' type='solid' color='#f10000' ></box-icon>
+                        {% endif %} 
+                    </td>
+                    <td class="number">{{ part.created_at }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}
