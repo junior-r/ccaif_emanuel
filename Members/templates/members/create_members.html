@@ -13,7 +13,7 @@
 {% block content %}
     <header class="header d-flex justify-content-center w-100">
         <h1 class="mb-3">¡Registra un miembro!</h1>
-        <a href="{{ request.META.HTTP_REFERER }}" class="arrow-back">
+        <a href="{% url 'members' %}" class="arrow-back">
             <box-icon name='arrow-back' color='#ffffff'></box-icon>
         </a>
     </header>
