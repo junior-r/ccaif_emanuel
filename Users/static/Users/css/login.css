@@ -98,7 +98,6 @@ body {
 }
 
 .container .box_form form .buttons {
-    padding-top: 1rem;
     display: flex;
     flex-direction: column-reverse;
     gap: 1rem;

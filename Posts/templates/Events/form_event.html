@@ -4,11 +4,13 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-    <title>Regístrate para {{ event.title }} | CCAIFE</title>
+    <title>Regístrate para {{ event.title }} | CCAIF</title>
 {% endblock %}
 
 {% block styles %}
     <link rel="stylesheet" href="{% static 'Posts/css/form_event.css' %}">
+    <!-- DataTable -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css" />
 {% endblock %}
 
 {% block content %}
@@ -20,11 +22,11 @@
             <div class="event_body">
                 <h3 class="title text-center fw-bold">{{ event.title | capfirst }}</h3>
                 <span class="text fst-italic">{{ event.description | linebreaks }}</span>
-                <p class="number">Lugar: {{ event.place }}</p>
+                <p class="number">Lugar del evento: {{ event.place }}</p>
             </div>
             <div class="event_footer">
-                <p class="number">Fecha: {{ event.date }}</p>
-                <p class="active d-flex align-item-center">Activo:
+                <p class="number">Fecha del evento: {{ event.date }}</p>
+                <p class="active d-flex align-item-center">Activo:&nbsp;
                     {% if event.active %}
                         <box-icon name='check-circle' type='solid' color='#198754' ></box-icon>
                     {% else %}
@@ -34,7 +36,7 @@
             </div>
         </div>
         <div class="form_event">
-            <h2 class="title text-center fw-bold">Regístrate solo quedan <span class="text-danger">{{ rest | intcomma }}</span>/<span class="text-primary">{{ event.max_num_partp | intcomma }}</span></h2>
+            <h2 class="title text-center fw-bold">¡Regístrate solo quedan <span class="text-danger">{{ rest | intcomma }}</span>/<span class="text-primary">{{ event.max_num_partp | intcomma }}</span>!</h2>
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
 
@@ -103,7 +105,7 @@
 
     <div class="participants_list">
         <h3 class="title text-center fw-bold">Lista de participantes (<span class="text-info">{{ participants.count }}</span>)</h3>
-        <table class="table text-white">
+        <table class="table text-white table-hover" id="datatable_users">
             <thead>
                 <tr>
                     <th scope="col" class="title">Nombres</th>
@@ -135,5 +137,11 @@
 {% endblock %}
 
 {% block js %}
-
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- DataTable -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{% static 'Posts/js/dataTables.js' %}"></script>
 {% endblock %}
